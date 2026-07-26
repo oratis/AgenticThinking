@@ -1,0 +1,14 @@
+{
+  "name": "ep3-model-over-everything-deck",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Slide generator for Agentic Thinking EP03 · Model over Everything",
+  "license": "MIT",
+  "author": "Oratis",
+  "scripts": {
+    "build": "node build.js ../../EP3-Model-over-Everything.pptx"
+  },
+  "dependencies": {
+    "pptxgenjs": "^4.0.1"
+  }
+}

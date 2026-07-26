@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<style>
+  @font-face { font-family: 'X'; src: local('Helvetica Neue'); }
+  *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html,body { width: 1440px; height: 2560px; background: #000; }
+  body {
+    font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", Arial, sans-serif;
+    color: #fff; overflow: hidden; position: relative;
+  }
+  .stage { position: absolute; inset: 0; }
+
+  /* ---------- glow behind artwork ---------- */
+  .glow {
+    position: absolute; left: 50%; top: 1420px; transform: translate(-50%,-50%);
+    width: 1150px; height: 780px; border-radius: 50%;
+    background: radial-gradient(ellipse at center, rgba(45,220,120,.30) 0%, rgba(35,190,105,.13) 38%, rgba(0,0,0,0) 70%);
+    filter: blur(24px);
+  }
+
+  /* ---------- header ---------- */
+  .head { position: absolute; left: 100px; top: 168px; width: 1240px; }
+  .brand {
+    font-size: 132px; font-weight: 800; line-height: 1.02; letter-spacing: -2px;
+  }
+  .brand .row2 { display: flex; align-items: center; gap: 34px; }
+  .pill {
+    background: #34E27A; color: #04140A; font-size: 60px; font-weight: 800;
+    padding: 10px 46px 16px; border-radius: 999px; letter-spacing: 1px; line-height: 1;
+    display: inline-flex; align-items: center; height: 108px;
+  }
+  .title {
+    margin-top: 92px; font-size: 128px; font-weight: 700; line-height: 1.08; letter-spacing: -1.5px;
+  }
+  .title em { font-style: normal; color: #34E27A; }
+  .sub {
+    margin-top: 26px; font-size: 50px; font-weight: 400; font-style: italic; color: #E6E9E7;
+    letter-spacing: -.4px;
+  }
+
+  /* ---------- artwork ---------- */
+  svg.art { position: absolute; left: 50%; top: 1000px; transform: translateX(-50%); }
+
+  /* ---------- info box ---------- */
+  .info {
+    position: absolute; left: 100px; top: 1980px; width: 1240px; height: 190px;
+    border: 3px solid #34E27A; border-radius: 6px; display: flex; align-items: stretch;
+  }
+  .info .cell { flex: 1; padding: 32px 0 0 44px; }
+  .info .cell + .cell { border-left: 3px solid #34E27A; }
+  .info .k { font-size: 38px; font-style: italic; color: #D9DEDB; letter-spacing: .5px; }
+  .info .v { font-size: 58px; font-weight: 700; margin-top: 12px; letter-spacing: -.5px; }
+  .link {
+    position: absolute; left: 0; top: 2214px; width: 1440px; text-align: center;
+    font-size: 44px; font-style: italic; color: #E4E8E6; letter-spacing: .4px;
+  }
+  .zh {
+    position: absolute; left: 0; top: 2352px; width: 1440px; text-align: center;
+    font-size: 54px; font-weight: 700; letter-spacing: -.4px;
+  }
+  .sig {
+    position: absolute; right: 100px; top: 2452px;
+    font-size: 28px; color: #59635D; letter-spacing: 5px;
+  }
+  .kicker3 {
+    position: absolute; left: 100px; top: 2452px;
+    font-size: 28px; color: #59635D; letter-spacing: 5px;
+  }
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="glow"></div>
+
+  <div class="head">
+    <div class="brand">
+      <div>AGENTIC</div>
+      <div class="row2"><span>THINKING</span><span class="pill">EP03</span></div>
+    </div>
+    <div class="title">Model over<br><em>Everything</em></div>
+    <div class="sub">with Model Router Design</div>
+  </div>
+
+  <!-- ================= artwork: a model core radiating into modalities ================= -->
+  <svg class="art" width="1280" height="840" viewBox="0 0 1280 840" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#34E27A" stop-opacity=".95"/>
+        <stop offset="100%" stop-color="#34E27A" stop-opacity=".25"/>
+      </linearGradient>
+      <filter id="soft" x="-60%" y="-60%" width="220%" height="220%">
+        <feGaussianBlur stdDeviation="9" result="b"/>
+        <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+      <filter id="soft2" x="-60%" y="-60%" width="220%" height="220%">
+        <feGaussianBlur stdDeviation="4" result="b"/>
+        <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+    </defs>
+
+    <g stroke="#34E27A" stroke-width="2.4" opacity=".5">
+      <!-- routing fan: left -->
+      <path d="M180 190 H 330 Q 360 190 380 214 L 470 322"/>
+      <path d="M120 330 H 300 Q 336 330 356 352 L 456 400"/>
+      <path d="M150 500 H 320 Q 352 500 372 480 L 464 424"/>
+      <path d="M190 640 H 340 Q 372 640 392 616 L 476 512"/>
+      <!-- routing fan: right -->
+      <path d="M1100 190 H 950 Q 920 190 900 214 L 810 322"/>
+      <path d="M1160 330 H 980 Q 944 330 924 352 L 824 400"/>
+      <path d="M1130 500 H 960 Q 928 500 908 480 L 816 424"/>
+      <path d="M1090 640 H 940 Q 908 640 888 616 L 804 512"/>
+    </g>
+
+    <!-- endpoint dots -->
+    <g fill="#34E27A" filter="url(#soft2)">
+      <circle cx="180" cy="190" r="9"/><circle cx="120" cy="330" r="9"/>
+      <circle cx="150" cy="500" r="9"/><circle cx="190" cy="640" r="9"/>
+      <circle cx="1100" cy="190" r="9"/><circle cx="1160" cy="330" r="9"/>
+      <circle cx="1130" cy="500" r="9"/><circle cx="1090" cy="640" r="9"/>
+    </g>
+
+    <!-- modality glyphs, line-art in circles -->
+    <g stroke="#fff" stroke-width="3.4" fill="none">
+      <!-- text -->
+      <circle cx="252" cy="146" r="52" stroke="#34E27A" stroke-width="3"/>
+      <path d="M226 130 h52 M226 148 h52 M226 166 h34"/>
+      <!-- image -->
+      <circle cx="192" cy="286" r="52" stroke="#34E27A" stroke-width="3"/>
+      <rect x="166" y="264" width="52" height="44" rx="4"/>
+      <path d="M166 296 l14 -14 12 12 10 -10 16 16"/><circle cx="182" cy="278" r="5"/>
+      <!-- audio -->
+      <circle cx="222" cy="556" r="52" stroke="#34E27A" stroke-width="3"/>
+      <path d="M200 542 v28 M212 530 v52 M224 518 v76 M236 534 v44 M248 546 v20"/>
+      <!-- action / robot arm -->
+      <circle cx="262" cy="696" r="52" stroke="#34E27A" stroke-width="3"/>
+      <path d="M240 722 h44 M262 722 v-28 M262 694 l-20 -22 M262 694 l22 -20"/>
+      <circle cx="242" cy="672" r="6"/><circle cx="284" cy="674" r="6"/>
+
+      <!-- right: video -->
+      <circle cx="1028" cy="146" r="52" stroke="#34E27A" stroke-width="3"/>
+      <rect x="1000" y="126" width="40" height="40" rx="4"/>
+      <path d="M1040 138 l16 -10 v44 l-16 -10 z"/>
+      <!-- right: 3D / world -->
+      <circle cx="1088" cy="286" r="52" stroke="#34E27A" stroke-width="3"/>
+      <path d="M1088 258 l26 15 v30 l-26 15 -26 -15 v-30 z"/>
+      <path d="M1088 258 v30 M1088 288 l26 15 M1088 288 l-26 15"/>
+      <!-- right: code -->
+      <circle cx="1058" cy="556" r="52" stroke="#34E27A" stroke-width="3"/>
+      <path d="M1040 540 l-16 16 16 16 M1076 540 l16 16 -16 16"/>
+      <!-- right: chip -->
+      <circle cx="1018" cy="696" r="52" stroke="#34E27A" stroke-width="3"/>
+      <rect x="998" y="676" width="40" height="40" rx="4"/>
+      <path d="M1008 676 v-12 M1018 676 v-12 M1028 676 v-12 M1008 716 v12 M1018 716 v12 M1028 716 v12 M998 686 h-12 M998 696 h-12 M998 706 h-12 M1038 686 h12 M1038 696 h12 M1038 706 h12"/>
+    </g>
+
+    <!-- ============ central core: layered stack = the model ============ -->
+    <g filter="url(#soft)">
+      <!-- outer hexagon -->
+      <path d="M640 208 L826 316 V532 L640 640 L454 532 V316 Z"
+            stroke="#34E27A" stroke-width="4" fill="rgba(20,60,36,.34)"/>
+      <!-- inner hexagon -->
+      <path d="M640 274 L768 348 V496 L640 570 L512 496 V348 Z"
+            stroke="#fff" stroke-width="3.2" fill="none" opacity=".92"/>
+      <!-- stacked layers inside = transformer blocks -->
+      <g stroke="#34E27A" stroke-width="3.6" opacity=".95">
+        <path d="M566 386 h148"/>
+        <path d="M566 422 h148"/>
+        <path d="M566 458 h148"/>
+      </g>
+      <!-- attention crosslinks -->
+      <g stroke="#fff" stroke-width="2" opacity=".55">
+        <path d="M584 386 L640 422 L696 386"/>
+        <path d="M584 422 L640 458 L696 422"/>
+      </g>
+      <circle cx="640" cy="422" r="13" fill="#34E27A"/>
+    </g>
+
+    <!-- base reflection lines -->
+    <g stroke="#34E27A" stroke-width="2" opacity=".38">
+      <path d="M300 706 H 980"/>
+      <path d="M360 742 H 920"/>
+      <path d="M430 778 H 850"/>
+    </g>
+  </svg>
+
+  <div class="info">
+    <div class="cell">
+      <div class="k">TIME</div>
+      <div class="v">2026.07.28&nbsp;&nbsp;11:00</div>
+    </div>
+    <div class="cell">
+      <div class="k">LIVE ON</div>
+      <div class="v">Feishu / 飞书直播</div>
+    </div>
+  </div>
+
+  <div class="link">github.com/oratis/AgenticThinking</div>
+  <div class="zh">模型即天花板的 AI 系统设计（以 Model Router 为案例）</div>
+  <div class="kicker3">基础 · 前沿 · 实践</div>
+  <div class="sig">ORATIS</div>
+</div>
+</body>
+</html>
