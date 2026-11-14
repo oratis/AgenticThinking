@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hype Circle · Agentic Thinking EP06</title>
+<style>:root {
+  color-scheme: dark;
+  --ink: #f3f5eb;
+  --muted: #b7c0ae;
+  --lime: #b1fc70;
+  --line: #424b3e;
+  --paper: #101510;
+  font-family: "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+  color: var(--ink); background: #080a08;
+}
+* { box-sizing: border-box; }
+body { margin: 0; }
+button, select { font: inherit; color: var(--ink); background: #171d16; border: 1px solid var(--line); border-radius: 5px; padding: 7px 12px; cursor: pointer; }
+button:hover:enabled, select:hover { border-color: var(--lime); }
+button:disabled { opacity: .35; }
+button:focus-visible, select:focus-visible, summary:focus-visible { outline: 2px solid var(--lime); outline-offset: 2px; }
+a { color: var(--lime); text-underline-offset: .18em; overflow-wrap: anywhere; }
+.sr { position: absolute; width: 1px; height: 1px; clip-path: inset(50%); overflow: hidden; }
+.toolbar, .controls { display: flex; align-items: center; gap: 10px; justify-content: center; font-size: 14px; }
+.toolbar { min-height: 55px; padding: 8px 16px; flex-wrap: wrap; background: #080a08; }
+.wordmark { font-size: 19px; font-weight: 700; letter-spacing: -.8px; margin-right: 8px; }
+.controls { height: 50px; }
+.controls button { font-size: 18px; padding: 2px 16px 5px; }
+#count { font-variant-numeric: tabular-nums; min-width: 70px; text-align: center; }
+select { max-width: 35vw; }
+#viewport { position: relative; height: calc(100dvh - 105px); }
+#stage { position: absolute; top: 50%; left: 50%; width: 1280px; height: 720px; transform: translate(-50%, -50%) scale(var(--scale, .75)); }
+.slide { position: relative; background: var(--paper); width: 1280px; height: 720px; padding: 42px 70px 68px; display: none; }
+.slide.active { display: block; }
+.folio, .slide footer { display: flex; align-items: center; justify-content: space-between; color: var(--muted); font-size: 15px; }
+.folio { letter-spacing: 1.4px; border-bottom: 1px solid var(--line); padding-bottom: 17px; }
+.folio span:last-child { font-weight: 650; font-style: italic; letter-spacing: -.3px; }
+.slide footer { position: absolute; bottom: 28px; left: 70px; right: 70px; font-size: 15px; }
+.slide footer span { font-variant-numeric: tabular-nums; }
+h2 { margin: 35px 0 22px; font-size: 55px; font-weight: 680; letter-spacing: -2px; line-height: 1.19; text-wrap: pretty; }
+.body { font-size: 27px; line-height: 1.58; }
+.body > p { margin: 0 0 19px; max-width: 1070px; }
+.body strong { color: var(--lime); }
+.body > p:has(> strong:first-child) { margin-top: 27px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 24px; max-width: none; }
+.body table { border-collapse: collapse; width: 100%; margin-top: 22px; font-size: 25px; line-height: 1.48; }
+th, td { text-align: left; padding: 14px 20px; vertical-align: top; }
+th { font-size: .94em; color: var(--lime); background: #1e2b1c; }
+td { border-bottom: 1px solid var(--line); }
+.panels { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; margin-top: 34px; }
+.panels:has(> :nth-child(3)) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.panels > div { border-top: 3px solid #7f9e6e; padding-top: 18px; }
+.panels h3 { color: var(--lime); font-weight: 620; font-size: 32px; letter-spacing: -.6px; margin: 0 0 12px; }
+.panels p { margin: 0; font-size: 26px; line-height: 1.6; }
+#s01 svg { display: block; width: 91%; height: 287px; margin: 0 auto; }
+#s01 h2 { margin-bottom: 12px; }
+#s01 .body > p { margin: 0 0 6px; }
+#s01 .body > p:has(>strong:first-child) { margin: 6px 0; padding: 0; border: 0; font-size: 21px; }
+#s03 table { font-variant-numeric: tabular-nums; margin-top: 8px; }
+#s03 td, #s03 th { padding: 8px 18px; }
+#s03 td:last-child, #s03 th:last-child { background: #1b2719; }
+#s03 .body > p:has(strong) { border: 0; padding: 0; margin-top: 16px; }
+#s04 { --paper: #152315; }
+#s06 h2, #s11 h2 { margin-bottom: 42px; }
+#s06 .panels, #s11 .panels { display: block; margin-top: 0; }
+#s06 .panels > div, #s11 .panels > div { display: grid; grid-template-columns: 320px 1fr; gap: 28px; padding: 17px 0; border-top: 1px solid var(--line); }
+#s06 .panels h3, #s11 .panels h3 { margin: 0; font-size: 28px; }
+#s06 .panels p, #s11 .panels p { font-size: 24px; line-height: 1.52; }
+#s07 th, #s07 td { padding: 22px; }
+#s07 td:first-child { color: var(--muted); width: 22%; }
+#s07 th:nth-child(n+2) { width: 39%; }
+#s08 .body > p:first-child, #s09 .body > p:first-child { font-size: 36px; font-weight: 500; max-width: 1000px; letter-spacing: -.7px; line-height: 1.45; }
+#s09 .panels { margin-top: 22px; }
+#s09 .body > p:has(> strong:first-child) { margin-top: 14px; padding-top: 10px; }
+#s11 { --paper: #142114; }
+#s11 .body > p:has(strong) { margin-top: 12px; }
+.notes { display: none; }
+dialog { width: min(760px, 95vw); max-height: 84vh; border: 1px solid #73836b; border-radius: 8px; color: var(--ink); background: #182017; padding: 22px 32px; }
+dialog::backdrop { background: #000a; }
+.dialog-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; }
+.dialog-head h2 { margin: 0; font-size: 23px; letter-spacing: 0; }
+.dialog-head button { flex-shrink: 0; }
+#script-copy, .notes { font-size: 17px; line-height: 1.85; }
+.reading .toolbar { position: sticky; top: 0; z-index: 4; border-bottom: 1px solid var(--line); }
+.reading #viewport { height: auto; }
+.reading #stage { position: static; width: auto; height: auto; transform: none; }
+.reading .slide { display: block; margin: 12px auto 26px; width: min(100%, 950px); height: auto; padding: 30px clamp(18px, 5vw, 52px); scroll-margin-top: 100px; }
+.reading .slide h2 { font-size: clamp(28px, 5vw, 43px); margin: 24px 0 18px; letter-spacing: -.9px; }
+.reading .body, .reading .panels p, .reading .slide .body > p, .reading .slide .panels p { font-size: 19px; }
+.reading .slide .panels { display: block; margin: 22px 0; }
+.reading .slide .panels > div, .reading #s06 .panels > div, .reading #s11 .panels > div { display: block; padding: 13px 0; border-top: 1px solid var(--line); }
+.reading .slide .panels h3 { font-size: 21px; margin: 0 0 6px; }
+.reading .slide table { font-size: 17px; }
+.reading .slide td, .reading .slide th { padding: 10px; }
+.reading #s01 svg { width: 100%; height: auto; }
+.reading .slide footer { position: static; margin: 25px 0 10px; font-size: 13px; }
+.reading .notes { display: block; border-top: 1px solid var(--line); padding: 12px 0 0; }
+summary { cursor: pointer; color: var(--lime); }
+.reading .controls, .reading #notes { display: none; }
+@media (max-width: 700px) {
+  .toolbar { gap: 6px; padding: 8px 6px; }
+  .wordmark { display: none; }
+  select { max-width: 45vw; }
+  .reading .slide table { font-size: 15px; }
+  .reading .slide td, .reading .slide th { padding: 8px 6px; }
+  .reading .folio { font-size: 11px; }
+}
+@page { size: 1280px 720px; margin: 0; }
+@media print {
+  html, body { background: var(--paper); print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .toolbar, .controls, dialog, .notes { display: none !important; }
+  #viewport { height: auto; }
+  #stage { position: static; width: auto; height: auto; transform: none; }
+  .slide { display: block; break-after: page; }
+  .slide:last-child { break-after: auto; }
+}
+</style>
+</head>
+<body>
+<nav class="toolbar" aria-label="讲义导航">
+  <span class="wordmark">Hype Circle</span>
+  <label><span class="sr">跳到指定页</span><select id="toc"></select></label>
+  <button id="notes" type="button">讲稿 N</button>
+  <button id="read" type="button" aria-pressed="false">连续阅读</button>
+  <button id="full" type="button">全屏</button>
+</nav>
+<main id="viewport"><div id="stage"><section class="slide" id="s01" aria-labelledby="t01">
+    <header class="folio"><span>AGENTIC THINKING　/　EP06</span><span>Hype Circle</span></header>
+    <h2 id="t01">Gartner Hype Cycle：我们走到哪了？</h2>
+    <div class="body"><p>2022 年 11 月 30 日，ChatGPT 走到公众面前。本期判断，生成式 AI 正从期望膨胀期走向幻灭低谷。</p>
+<svg xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc" width="990" height="302" viewBox="0 0 990 302">
+<title id="title">Gartner Hype Cycle 五阶段示意</title>
+<desc id="desc">纵轴为公众预期，横轴为时间。ChatGPT 发布是本期选定的触发点，峰后的圆点代表本期对当下的判断。</desc>
+<rect width="990" height="302" fill="#101510" rx="8"/>
+<g font-family="Helvetica Neue,PingFang SC,Microsoft YaHei,sans-serif" fill="#d4ddce">
+  <g stroke="#364135" stroke-width="1" stroke-dasharray="3 6">
+    <path d="M58 79H956 M58 142H956 M58 204H956"/>
+  </g>
+  <path d="M58 51V242H955" stroke="#85957e" stroke-width="1.5" fill="none"/>
+  <g font-size="15"><text x="27" y="30">公众预期</text><text x="925" y="279">时间</text></g>
+  <path d="M76 219 C146 217 174 90 211 64 C228 51 242 61 260 84 C305 145 336 211 429 211 C543 211 588 150 686 143 C779 136 855 138 930 136" fill="none" stroke="#a5f958" stroke-width="5" stroke-linecap="round"/>
+  <g fill="#a5f958"><circle cx="76" cy="219" r="5"/><circle cx="429" cy="211" r="5"/></g>
+  <circle cx="260" cy="84" r="13" fill="#101510" stroke="#a5f958" stroke-width="2"/><circle cx="260" cy="84" r="5" fill="#a5f958"/>
+  <path d="M276 76L303 48H328" stroke="#a5f958" fill="none"/>
+  <text x="339" y="53" font-size="21" fill="#c8ffa4" font-weight="600">本期判断 · 高峰向低谷转折</text>
+  <g font-size="18" text-anchor="middle">
+    <text x="108" y="270">创新触发</text><text x="226" y="270">期望膨胀</text>
+    <text x="429" y="270">幻灭低谷</text><text x="632" y="270">启蒙爬升</text><text x="830" y="270">生产成熟</text>
+  </g>
+</g></svg>
+
+<p><strong>高峰</strong>　天时、地利、人和促成 Seedance 和 Claude Code 的爆发，增长又给 AGI 愿景带来关注。</p>
+<p><strong>转折</strong>　当失败和返工成为日常，媒体关注下降，跟风者退出，用户留下来要看产品能否持续改进。</p>
+</div>
+    <footer>AI 技术周期的趋势 <span>01 / 11</span></footer>
+    <details class="notes"><summary>讲稿与来源</summary><div><p>2022 年 11 月 30 日，OpenAI 发布 ChatGPT。普通人打开网页就能和模型对话，这给了我们一个观察本轮公众预期的起点。Gartner 的曲线描绘人们对技术的预期。图中标出的位置是我对生成式 AI 市场的判断。代码助手、视频生成、游戏陪伴各有自己的节奏。</p>
+<p>在期望膨胀期，一段惊艳演示比十次失败更容易传播。少数成功案例得到反复报道，用户自然会期待每次都有同样的结果。到了转折处，企业把演示放进日常流程，发现慢、贵、需要返工。媒体关注开始减少，跟风的供应商难以续约，有的退出，有的放弃产品。留下的团队要能把早期用户最常遇到的问题一项项修好。</p>
+<p>为什么高峰也能长出好产品？天时是用户已经在等这件事，地利是模型跨过可用门槛，人和是团队把能力做成顺手的产品。Seedance 2.0 支持把参考图、声音和视频用于创作，创作者可以把可见的效果直接展示给下一位用户。Claude Code 则把模型接进开发者原有的工作环境。Anthropic 在 2025 年 12 月披露，Claude Code 在六个月内达到 10 亿美元年化收入规模。这是按当时速度折算的收入，和六个月的实际累计收入是两个口径。</p>
+<p>增长又会给更远的承诺提供听众。OpenAI 在 2025 年 12 月披露 ChatGPT 每周服务超过 8 亿用户，早在章程中就提出让 AGI 造福全人类。人们容易把眼前的增长接到 AGI 的故事上。周活可以说明多少人在用，离 AGI 有多远还需要另一套证据。</p>
+<p><a href="https://www.gartner.com/en/research/methodologies/gartner-hype-cycle">Gartner 曲线方法</a> · <a href="https://openai.com/index/chatgpt/">ChatGPT 发布</a> · <a href="https://seed.bytedance.com/zh/blog/official-launch-of-seedance-2-0">Seedance 2.0 发布</a> · <a href="https://www.anthropic.com/news/anthropic-acquires-bun-as-claude-code-reaches-usd1b-milestone">Claude Code 增长口径</a> · <a href="https://openai.com/index/the-state-of-enterprise-ai-2025-report/">OpenAI 用户口径</a> · <a href="https://openai.com/charter/">OpenAI 章程</a></p>
+</div></details>
+  </section>
+<section class="slide" id="s02" aria-labelledby="t02">
+    <header class="folio"><span>AGENTIC THINKING　/　EP06</span><span>Hype Circle</span></header>
+    <h2 id="t02">中国开源 AI 如何缩短期望膨胀期？</h2>
+    <div class="body"><p>过去，一家美国实验室展示新能力，到客户有第二个可用选择，中间有一段时间差。开放权重让客户能更早拿自己的任务做比较。</p>
+<div class="panels"><div><h3>DeepSeek-R1</h3>
+<p>2025 年 1 月公布权重和六个蒸馏模型。应用团队可以下载模型，用自己的题目重跑推理任务。</p>
+</div><div><h3>Qwen3</h3>
+<p>2025 年 4 月开放多种尺寸的模型。团队可以按自己的硬件与延迟要求，测试哪一档已经够用。</p>
+</div></div><p><strong>本期推断</strong>　当替代方案更早出现，客户也会更早追问质量、交付成本和续约理由。靠能力稀缺维持高预期的窗口随之缩短。</p>
+</div>
+    <footer>AI 技术周期的趋势 <span>02 / 11</span></footer>
+    <details class="notes"><summary>讲稿与来源</summary><div><p>我说的“打破美国的创新周期底层逻辑”，特指一种常见商业路径。前沿实验室先展示突破，开发者排队接入，市场在一段时间内按领先者的演示想象价值，随后竞争者才有机会验证或替代它。当同类能力能够下载、部署和改造，应用团队自己就能做这个比较，也有了与供应商议价的依据。</p>
+<p>比如做游戏攻略，团队可以把一批玩家真问过的问题交给两个模型，要求它们说明依据、在相同延迟内作答。开放模型如果过线，采购方就有替代选项。如果差距仍大，前沿模型的溢价也更容易说清。自部署还要付硬件、运维和容量闲置的成本，比较时要全部算进去。</p>
+<p>判断这个窗口有没有缩短，可以按任务跟踪两个日期：前沿能力首次可用日，以及第二个方案首次通过同一验收集的日期。再看客户何时开始试用或切换。上面的发布记录说明验证途径已经出现，具体缩短多少还要有这种纵向记录。</p>
+<p><a href="https://api-docs.deepseek.com/news/news250120">DeepSeek-R1 发布</a> · <a href="https://qwenlm.github.io/blog/qwen3/">Qwen3 发布与开放权重</a></p>
+</div></details>
+  </section>
+<section class="slide" id="s03" aria-labelledby="t03">
+    <header class="folio"><span>AGENTIC THINKING　/　EP06</span><span>Hype Circle</span></header>
+    <h2 id="t03">低谷期，怎样同时改产品和毛利？</h2>
+    <div class="body"><p>假设一条交付成功的视频收 10 元。用户只付一次，团队要承担每次生成和返工的成本。</p>
+<table>
+<thead>
+<tr>
+<th align="left">每单交付（示例）</th>
+<th align="right">整条重做</th>
+<th align="right">只修失败镜头</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">确认收入</td>
+<td align="right">10 元</td>
+<td align="right">10 元</td>
+</tr>
+<tr>
+<td align="left">首次生成＋其他直接交付成本</td>
+<td align="right">6 元</td>
+<td align="right">6 元</td>
+</tr>
+<tr>
+<td align="left">返工成本</td>
+<td align="right">3 元</td>
+<td align="right">1 元</td>
+</tr>
+<tr>
+<td align="left"><strong>每单毛利</strong></td>
+<td align="right"><strong>1 元</strong></td>
+<td align="right"><strong>3 元</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>毛利率</strong></td>
+<td align="right"><strong>10%</strong></td>
+<td align="right"><strong>30%</strong></td>
+</tr>
+</tbody></table>
+<p><strong>每周看两件事</strong>　用户能否更快拿到愿意保留的成片？算上失败尝试，每个付费订单还能留下多少钱？</p>
+</div>
+    <footer>AI 技术周期的趋势 <span>03 / 11</span></footer>
+    <details class="notes"><summary>讲稿与来源</summary><div><p>热度退下去之后，用户还肯回来、每次交付还有毛利，团队才有条件持续改产品。毛利等于确认收入减直接交付成本，毛利率再除以确认收入。表里两种方案的首次成本相同，变化只有返工范围。保住好镜头，用户少等一轮，团队每单多留两元。表中数字是讲解假设。</p>
+<p>产品侧，每周抽看用户放弃的任务，区分是模型画错、工具丢了素材，还是等待太久。先修最常见的一个原因，再看同一批任务的首轮采纳率和交付时间。商业侧，把推理、工具、存储、人工交付以及失败重试归到相应订单，按付费档位核算毛利。退款应冲减收入。</p>
+<p>例如，先让创作者确认低成本分镜，再提供付费高清成片。做小范围测试时，同时看付费转化、复用率、交付质量与毛利。只靠低配模型压成本，如果付费用户开始流失，产品和商业化就没有一起改善。研发投入、获客费用和现金余额还决定公司能撑多久。</p>
+</div></details>
+  </section>
+<section class="slide" id="s04" aria-labelledby="t04">
+    <header class="folio"><span>AGENTIC THINKING　/　EP06</span><span>Hype Circle</span></header>
+    <h2 id="t04">模型即产品的悖论</h2>
+    <div class="body"><p>用户第一次来，可能只因为某个模型会生成一段漂亮的视频。等同一个模型也进了别人的产品，用户第二次为什么还要回来？</p>
+<div class="panels"><div><h3>第一次生成</h3>
+<p>上传一张角色图，拿到五秒钟的镜头。只要输出足够惊艳，一项模型能力就能构成完整的首次体验。</p>
+</div><div><h3>第二次修改</h3>
+<p>“保留刚才的脸和声音，只改最后两秒。”此时需要原素材、镜头边界、编辑工具和版本记录。谁能接着改，谁就更有机会留下用户。</p>
+</div></div><p><strong>替换试验</strong>　保留项目、素材和工具，更换底层模型。观察用户能否按原标准交付，究竟是哪一步失去了价值？</p>
+</div>
+    <footer>AI 技术周期的趋势 <span>04 / 11</span></footer>
+    <details class="notes"><summary>讲稿与来源</summary><div><p>对模型团队，能力突破可以直接生长为产品。对使用第三方模型的应用团队，这既是起点，也是一个风险：当供应商涨价、限流，或者自己推出相同入口，产品还能否履行原有承诺？</p>
+<p>把试验做具体。选十个已交付的项目，把用户接受过的版本留作参照。换模型后重做用户当时提过的一次修改，请创作者判断角色是否一致、改动是否局部、结果是否可继续使用，再记录交付成本。若替换后核心价值几乎全部消失，我们就不能把这项价值算作应用自身的竞争力。至于在今天先用一个模型起步，完全可以由这个试验决定下一步要补什么。</p>
+</div></details>
+  </section>
+<section class="slide" id="s05" aria-labelledby="t05">
+    <header class="folio"><span>AGENTIC THINKING　/　EP06</span><span>Hype Circle</span></header>
+    <h2 id="t05">非模型产品的三种机会</h2>
+    <div class="body"><p>同一个承诺可以由不同模型完成。应用团队要掌握选择模型的依据、执行任务的过程，以及真正能改变结果的工具。</p>
+<div class="panels"><div><h3>Model router</h3>
+<p>按用户价值定质量和等待上限，按技术能力筛选输入模态和工具支持，再按成本预算路由。主模型不可用时，备选也要通过同一验收标准。</p>
+</div><div><h3>Data · harness · context</h3>
+<p>Data 留下真实任务与纠错样本。Harness 管理执行、重试和验收。Context 把当前目标、素材版本和必要记忆送到模型眼前。</p>
+</div><div><h3>独特的 tool</h3>
+<p>把“只换一个镜头”做成可调用的动作。输入原片、镜头和改动要求，输出可预览、可撤回的新版本。</p>
+</div></div></div>
+    <footer>AI 技术周期的趋势 <span>05 / 11</span></footer>
+    <details class="notes"><summary>讲稿与来源</summary><div><p>如果少了某个模型，产品就会丢掉绝大部分价值，我会判断它作为独立应用还没有成立。多模型也有工程代价。先拿一个用户真正会付费的结果定标，再看第二个模型能不能以可接受的成本接手。这样才知道多接一家供应商解决了什么。</p>
+<p>系列第 3 期的 Cuddler Model Router 案例里，付费模型发生限流时，早期回退链只覆盖免费模型。候选模型是有的，用户应得的服务等级却接不上。这个例子说明，路由必须同时适配用户购买的价值、候选模型的实际能力以及包括重试的交付成本。</p>
+<p>三者也可以在一次任务里配合。路由器选择会做局部重绘的模型，harness 负责提交任务、读回结果并检查版本，context 提供锁定的角色图和待改镜头。工具把新版本交还创作者。创作者最终保留哪一版，又给下一轮评测留下数据。</p>
+<p><a href="https://github.com/oratis/AgenticThinking/blob/ca0a3cf/EP3%20Model%20over%20Everything/src/parts/03-part-c.md">EP03 · Cuddler Model Router 案例</a></p>
+</div></details>
+  </section>
+<section class="slide" id="s06" aria-labelledby="t06">
+    <header class="folio"><span>AGENTIC THINKING　/　EP06</span><span>Hype Circle</span></header>
+    <h2 id="t06">现有模型已经打开哪些机会？</h2>
+    <div class="body"><div class="panels"><div><h3>工作从提问开始</h3>
+<p>“Knowledge is to know the right answer, but intelligence is to know the right question.” 问对问题的关键，是了解现场，并说清答案将改变谁的哪个决定。</p>
+</div><div><h3>30B 级模型可以先上场</h3>
+<p>我的假设是，多数边界清楚、能调用工具验收的常规子任务，用约 300 亿参数的模型就值得一试。蒸馏还能把其中一部分能力迁移到更小的模型。</p>
+</div><div><h3>娱乐走向消费即生成</h3>
+<p>创作者先用模型试分镜、剪预告。再往前一步，观众看完这一幕，选择跟谁走，系统才为他生成下一幕。</p>
+</div></div></div>
+    <footer>AI 技术周期的趋势 <span>06 / 11</span></footer>
+    <details class="notes"><summary>讲稿与来源</summary><div><p>当 Agent 能查资料、调工具、跑验证，人的判断更集中在要解决哪个问题。运营说“帮我分析流失”，Agent 可以列出十种解释。换一个问题：“第一次生成失败的付费用户，有多少在重试前离开？如果占比最高，我们这周先改哪一步？”这时才知道要查哪些事件、谁能采取行动、用什么结果验证判断。</p>
+<p>30B 是工程起跑线。比如意图分类、填写工具参数、按已有资料作答，都能给出验收样本。先用真实任务测通过率、延迟和每次成功成本，能过线的交给小模型，过不了的升级或交人。DeepSeek-R1 系列公布了 32B 及更小的蒸馏模型；这些模型的公开基准，只能作为选型线索。“多数”是限定场景里的待检验假设，现场评测决定哪些任务真能交付。</p>
+<p>娱乐的变化也有先后。创作的一头是构思、分镜和预演，一尾是成片后的剪辑、配音和分发。两头先省工时，再尝试让观看动作参与下一幕的生成。这种个性化要成立，角色得连贯，等待得够短，每次生成的成本也要有收入承接。</p>
+<p><a href="https://github.com/deepseek-ai/DeepSeek-R1">DeepSeek-R1 蒸馏模型与评测</a> · <a href="https://qwenlm.github.io/blog/qwen3/">Qwen3 模型规格</a></p>
+</div></details>
+  </section>
+<section class="slide" id="s07" aria-labelledby="t07">
+    <header class="folio"><span>AGENTIC THINKING　/　EP06</span><span>Hype Circle</span></header>
+    <h2 id="t07">陪伴和内容，用户为什么回来？</h2>
+    <div class="body"><table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left">陪伴：逗逗 AI、HakkoAI</th>
+<th align="left">内容：Cuddler</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">用户回来做什么</td>
+<td align="left">和看过上一局的伙伴再玩一局</td>
+<td align="left">看下一幕，或亲手改出另一版</td>
+</tr>
+<tr>
+<td align="left">产品先抓什么</td>
+<td align="left">上下文。知道我们刚经历了什么、何时该开口</td>
+<td align="left">工具。把选择变成可看、可改的作品</td>
+</tr>
+<tr>
+<td align="left">怎样判断做对了</td>
+<td align="left">下次见面，用户还要重新交代多少？</td>
+<td align="left">看完之后，有多少人愿意接着改、接着看？</td>
+</tr>
+</tbody></table>
+</div>
+    <footer>AI 技术周期的趋势 <span>07 / 11</span></footer>
+    <details class="notes"><summary>讲稿与来源</summary><div><p>这两条路可以相交。逗逗 AI 和 HakkoAI 的产品资料都强调感知游戏画面和实时语音，HakkoAI 还把跨游戏记忆作为卖点。对一个陪玩的伙伴，刚才怎么输掉这一局、玩家此时想不想听攻略，会直接改变一句话是否合适。</p>
+<p>Cuddler 也有角色聊天，同时提供剧集、分支故事、漫画和创作入口。这里把它放在内容一侧，是为了讨论另一种回访动机：观众喜欢一个角色，想看另一个结局，或者想把自己的那段对话变成一幕戏。下面两页分别用设计示例说明两种回访动机该怎样服务。</p>
+<p><a href="https://m.doudou.fun/">逗逗游戏伙伴</a> · <a href="https://www.hakko.ai/">HakkoAI</a> · <a href="https://cuddler.ai/docs/what-is-cuddler">Cuddler 产品说明</a></p>
+</div></details>
+  </section>
+<section class="slide" id="s08" aria-labelledby="t08">
+    <header class="folio"><span>AGENTIC THINKING　/　EP06</span><span>Hype Circle</span></header>
+    <h2 id="t08">陪伴的设计，从何时开口开始</h2>
+    <div class="body"><p>玩家上次说“让我自己摸索”。今天又在同一个 Boss 前倒下，伙伴该说什么？</p>
+<div class="panels"><div><h3>眼前发生了什么</h3>
+<p>读到玩家刚结束战斗，先留一点安静。一次失败只描述了局势，玩家此刻想不想听攻略还未知。</p>
+</div><div><h3>上次约定了什么</h3>
+<p>取回玩家明确表达过的偏好。等他主动问“刚才怎么躲”，再结合刚才那一下动作，给一句针对性的提示。</p>
+</div><div><h3>下次要记住什么</h3>
+<p>玩家说“这个 Boss 可以提醒我”。让他确认这条例外只适用于当前 Boss，也能随时改回去。</p>
+</div></div></div>
+    <footer>AI 技术周期的趋势 <span>08 / 11</span></footer>
+    <details class="notes"><summary>讲稿与来源</summary><div><p>这是围绕逗逗 AI、HakkoAI 所代表的游戏陪伴方向做的设计推演。两个玩家看到完全相同的失败画面，一位在练无提示通关，一位只想尽快过关。前者可能希望伙伴安静，后者可能希望伙伴在下一击前开口。知道屏幕上有什么，仅仅解决了一半问题。</p>
+<p>把近期事件和长期偏好分开。战斗画面过了就可以丢掉，经过用户确认的“这个 Boss 可以提醒”才值得跨会话保存，并写下适用对象与更新时间。把查看、改正和删除记忆的入口交给用户，免得一次误解跟着对话一直走。</p>
+<p>用一组配对回放来验收。画面完全相同，只改一条历史偏好，看伙伴是否改变出声时机。再看玩家关掉提示、纠正记忆、隔天重新解释的频率。对这种产品，少说一句也可能是一次正确响应。</p>
+<p><a href="https://www.magicneko.com/article/2/">逗逗 AI 产品说明</a> · <a href="https://www.hakko.ai/blog/article/introduce-hakkoai/">HakkoAI 场景感知与记忆</a></p>
+</div></details>
+  </section>
+<section class="slide" id="s09" aria-labelledby="t09">
+    <header class="folio"><span>AGENTIC THINKING　/　EP06</span><span>Hype Circle</span></header>
+    <h2 id="t09">内容的设计，从一个可修改的镜头开始</h2>
+    <div class="body"><p>在 Cuddler 的内容场景里，观众看完告别戏，想试一个改动：“让她留下来，前两个镜头我很喜欢。”</p>
+<div class="panels"><div><h3>保留</h3>
+<p>锁住前两个镜头、角色参考和声音，记录用户希望修改的最后一个镜头。</p>
+</div><div><h3>生成</h3>
+<p>工具只重做指定镜头，返回新片段、预览和本次成本。生成失败时保留原版，让创作者可以重试。</p>
+</div><div><h3>选择</h3>
+<p>并排预览两个结尾。观众选中的版本可以分享，也可以成为下一幕的起点。</p>
+</div></div><p><strong>工具的验收</strong>　指定镜头改了，其他镜头保住了，改一次花多少钱也能查到。</p>
+</div>
+    <footer>AI 技术周期的趋势 <span>09 / 11</span></footer>
+    <details class="notes"><summary>讲稿与来源</summary><div><p>Cuddler 已公开介绍从对话生成场景、观看剧集和体验分支故事的入口。这里的单镜头修改是围绕这些入口展开的设计示例。把一句“我想看另一种结局”直接发给视频模型，模型可能交回整部新片，用户最喜欢的两个镜头也跟着变了。</p>
+<p>一个可复用的工具需要读得懂作品结构。输入包括原版本、镜头标识、角色和声音参考、改动意图及预算上限。输出包括新片段、它替换的位置和费用。超时重试要能识别同一任务，避免重复扣费。发布之前仍可回到原版本。</p>
+<p>对用户，看的是改动采纳率以及看完是否愿意继续生成。对团队，看的是每个被采纳版本的总成本，失败、等待和废片都要归到相应任务。第 3 页那两元毛利的改善，在这里对应一个具体的工具边界。</p>
+<p><a href="https://cuddler.ai/docs">Cuddler 官方创作与观看指南</a> · <a href="https://cuddler.ai/blog/beyond-chat-multimodal-storytelling">同一角色跨视频、互动剧与漫画</a></p>
+</div></details>
+  </section>
+<section class="slide" id="s10" aria-labelledby="t10">
+    <header class="folio"><span>AGENTIC THINKING　/　EP06</span><span>Hype Circle</span></header>
+    <h2 id="t10">数据是最终的壁垒</h2>
+    <div class="body"><p>如果只留下两条成片，后来的人很难知道哪一帧出了问题。把原任务、改动和选择连起来，才能知道下一版应该改什么。</p>
+<table>
+<thead>
+<tr>
+<th align="left">一次交付留下什么</th>
+<th align="left">下次可以检验什么</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">原片、镜头范围和用户要求</td>
+<td align="left">工具是否只修改了指定位置？</td>
+</tr>
+<tr>
+<td align="left">旧版、新版，以及创作者保留或退回的原因</td>
+<td align="left">人物变脸和结尾写错，哪一种导致返工？</td>
+</tr>
+<tr>
+<td align="left">被采纳版本的总尝试次数、耗时和直接成本</td>
+<td align="left">换模型后，能否更便宜地交付同等质量？</td>
+</tr>
+</tbody></table>
+<p><strong>最难补采的记录</strong>　用户当时为什么放弃那个看起来也说得通的版本？</p>
+</div>
+    <footer>AI 技术周期的趋势 <span>10 / 11</span></footer>
+    <details class="notes"><summary>讲稿与来源</summary><div><p>陪伴里也有同类数据。玩家关掉攻略提醒，是嫌它太频繁、早已知道答案，还是只想自己探索？一个关闭事件很难回答。若玩家愿意补一句原因，把这句纠正限定在这个场景里，比累积一堆无标记聊天更有助于改产品。</p>
+<p>取得相应授权后，把这类记录整理成可回放的难例。用于评测的一批样本单独保留，避免调参时答案已经泄露。每次换模型或工具版本，重跑相同任务，检查历史失败是否复发，再观察新用户的真实表现。</p>
+<p>壁垒来自这条可重复的工作：用户在什么约束下做了哪个选择，团队能否据此改对下一版。这类有上下文、有结果、有弃选原因的数据，只有实际参与过交付的人才有机会收集。用量很大却找不到失败原因，数据的学习价值仍然有限。</p>
+</div></details>
+  </section>
+<section class="slide" id="s11" aria-labelledby="t11">
+    <header class="folio"><span>AGENTIC THINKING　/　EP06</span><span>Hype Circle</span></header>
+    <h2 id="t11">我们离 AGI 还有多远？</h2>
+    <div class="body"><div class="panels"><div><h3>架构的疑问</h3>
+<p>我的判断是，今天的 Transformer 不太可能直接成为 AGI 的最终架构。长任务需要反复推理、调用工具和纠错，每一次尝试都要付能量成本。</p>
+</div><div><h3>更值得测的效率</h3>
+<p>固定任务、质量门槛和延迟预算，比较每千瓦时能交付多少个合格结果。把失败、重试和工具消耗计入相同的测量边界。</p>
+</div><div><h3>自我改进仍需要数据</h3>
+<p>系统可以生成自己的练习题和解法，还得获得能检验对错的反馈。开放世界里，那些罕见失败、专家纠错和延迟出现的结果尤其难得。</p>
+</div></div><p><strong>团队今天能做的事</strong>　找到别人看不到的一次失败，取得授权，记下它为什么失败，并让下一版在同一任务上做得更好。</p>
+</div>
+    <footer>AI 技术周期的趋势 <span>11 / 11</span></footer>
+    <details class="notes"><summary>讲稿与来源</summary><div><p>我给不出可信的 AGI 倒计时。Transformer 的能力已经支持丰富产品，但如果长任务的每个纠错回合都要消耗大量计算，单靠扩大现有架构很难说明如何跨过能效门槛。我预期，模型架构研究会越来越重视单位能量能换来多少可靠智能。有关推理能耗的实测支持把任务与硬件条件纳入比较；“哪种架构最终通向 AGI”仍是开放问题。</p>
+<p>衡量时，把同一组真实任务交给两套系统，在相同验收和延迟约束下记录端到端能耗。即使一个模型每个 token 更省电，若它需要多次返工才交付，也可能在每个合格结果上更费电。别把训练能耗与单次推理混在一个分母里。</p>
+<p>AlphaGo Zero 用自我对弈生成训练经历，围棋规则给每盘提供明确的胜负信号。真实世界的“这一句合不合时宜”“这版镜头值不值得留”，没有棋局终局那样现成的裁判。从依赖现成数据，到自己生成经历，最后仍要靠数据判断哪次尝试更好。发现别人没有的数据，做最难获取的数据，始终值得投入。</p>
+<p><a href="https://arxiv.org/abs/2311.16863">推理能耗的跨任务实测</a> · <a href="https://www.nature.com/articles/nature24270">AlphaGo Zero 自我对弈研究</a></p>
+</div></details>
+  </section></div></main>
+<nav class="controls" aria-label="翻页">
+  <button id="prev" aria-label="上一页">←</button>
+  <span id="count" aria-live="polite">01 / 11</span>
+  <button id="next" aria-label="下一页">→</button>
+</nav>
+<dialog id="script-dialog"><div class="dialog-head"><h2 id="script-title">逐页讲稿</h2><button id="close">关闭</button></div><div id="script-copy"></div></dialog>
+<script>(() => {
+  const byId = id => document.getElementById(id);
+  const slides = [...document.querySelectorAll('.slide')];
+  const toc = byId('toc');
+  const dialog = byId('script-dialog');
+  let position = 0;
+  let reading = matchMedia('(max-width: 700px)').matches;
+  const pad = number => String(number).padStart(2, '0');
+  for (const [index, slide] of slides.entries()) {
+    toc.add(new Option(pad(index + 1) + '　' + slide.querySelector('h2').textContent, String(index)));
+  }
+  function fit() {
+    const viewport = byId('viewport');
+    const scale = Math.min((viewport.clientWidth - 8) / 1280, (viewport.clientHeight - 8) / 720);
+    byId('stage').style.setProperty('--scale', String(scale));
+  }
+  function show(index, scroll = false) {
+    position = Math.max(0, Math.min(index, slides.length - 1));
+    slides.forEach((slide, i) => slide.classList.toggle('active', i === position));
+    const slide = slides[position];
+    toc.value = String(position);
+    byId('count').textContent = pad(position + 1) + ' / ' + slides.length;
+    byId('prev').disabled = position === 0;
+    byId('next').disabled = position === slides.length - 1;
+    if (location.hash !== '#' + slide.id) history.replaceState(null, '', '#' + slide.id);
+    if (scroll && reading) slide.scrollIntoView({ block: 'start' });
+  }
+  function fromHash() {
+    const index = slides.findIndex(slide => '#' + slide.id === location.hash);
+    show(index < 0 ? 0 : index, true);
+  }
+  function setMode() {
+    document.body.classList.toggle('reading', reading);
+    byId('read').textContent = reading ? '演示模式' : '连续阅读';
+    byId('read').setAttribute('aria-pressed', String(reading));
+    if (!reading) window.scrollTo(0, 0);
+    fit();
+  }
+  function notes() {
+    byId('script-title').textContent = slides[position].querySelector('h2').textContent;
+    byId('script-copy').replaceChildren(slides[position].querySelector('.notes > div').cloneNode(true));
+    dialog.showModal();
+    dialog.scrollTop = 0;
+  }
+  byId('prev').onclick = () => show(position - 1);
+  byId('next').onclick = () => show(position + 1);
+  toc.onchange = () => show(Number(toc.value), true);
+  byId('notes').onclick = notes;
+  byId('close').onclick = () => dialog.close();
+  byId('read').onclick = () => { reading = !reading; setMode(); show(position, true); };
+  byId('full').onclick = () => {
+    if (document.fullscreenElement) document.exitFullscreen();
+    else document.documentElement.requestFullscreen?.().catch(() => {});
+  };
+  addEventListener('keydown', event => {
+    if (dialog.open || event.ctrlKey || event.altKey || event.metaKey || event.target.matches('select')) return;
+    if (event.key.toLowerCase() === 'r') { byId('read').click(); return; }
+    if (reading) return;
+    if (event.key.toLowerCase() === 'n') { notes(); return; }
+    if (event.key === ' ' && event.target.closest('button, a')) return;
+    if (['ArrowRight', 'PageDown', ' '].includes(event.key)) { event.preventDefault(); show(position + 1); }
+    if (['ArrowLeft', 'PageUp'].includes(event.key)) { event.preventDefault(); show(position - 1); }
+    if (event.key === 'Home') { event.preventDefault(); show(0); }
+    if (event.key === 'End') { event.preventDefault(); show(slides.length - 1); }
+  });
+  addEventListener('scroll', () => {
+    if (!reading) return;
+    const current = slides.findLastIndex(slide => slide.getBoundingClientRect().top < innerHeight * .4);
+    if (current >= 0 && current !== position) show(current);
+  }, { passive: true });
+  addEventListener('hashchange', fromHash);
+  addEventListener('resize', fit);
+  addEventListener('beforeprint', () => document.body.classList.remove('reading'));
+  addEventListener('afterprint', setMode);
+  setMode();
+  fromHash();
+})();
+</script>
+</body></html>

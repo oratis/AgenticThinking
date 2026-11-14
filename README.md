@@ -15,6 +15,21 @@
 | **EP03** | [**Model over Everything**](EP3%20Model%20over%20Everything/) | **模型是天花板；工程决定你离天花板多远** | **2026.07.28 11:00** | 📦 讲义已就绪 |
 | EP04 | Focus on what matters | — | — | 🕓 |
 | EP05 | Build for Future | — | — | 🕓 |
+| **EP06** | [**Hype Circle**](EP6%20Hype%20Circle/) | AI 技术周期的趋势：热度退去之后，用户为什么还会回来？ | **2026.11.18 11:00 北京时间** | 📦 讲义与海报已就绪 |
+
+---
+
+## EP06 · Hype Circle
+
+<img src="EP6%20Hype%20Circle/cover.jpg" width="260" align="right" alt="Hype Circle 第六期分享海报">
+
+**AI 技术周期的趋势** · Oratis · 2026 年 11 月 18 日（周三）上午 11:00，北京时间。
+
+热度退去之后，用户为什么还会回来？从 ChatGPT 时刻和 Gartner Hype Cycle 出发，本期讨论中国开放权重模型如何改变竞争节奏，再用一条视频订单核算返工与毛利。逗逗 AI、HakkoAI 和 Cuddler 的案例把问题带回产品设计，分别考察上下文、工具和真实用户反馈的价值。
+
+[打开 11 页离线讲义](EP6%20Hype%20Circle/EP6-Hype-Circle.html) · [逐页讲稿与来源](EP6%20Hype%20Circle/EP6-Hype-Circle.md) · [分享海报](EP6%20Hype%20Circle/cover.jpg)
+
+<br clear="right"/>
 
 ---
 
