@@ -1,0 +1,7 @@
+{
+  "name": "ep6-hype-circle-deck",
+  "private": true,
+  "type": "module",
+  "scripts": { "build": "node deck/build.mjs" },
+  "dependencies": { "pptxgenjs": "4.0.1" }
+}

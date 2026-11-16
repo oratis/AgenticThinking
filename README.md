@@ -15,6 +15,21 @@
 | **EP03** | [**Model over Everything**](EP3%20Model%20over%20Everything/) | **模型是天花板；工程决定你离天花板多远** | **2026.07.28 11:00** | 📦 讲义已就绪 |
 | EP04 | Focus on what matters | — | — | 🕓 |
 | EP05 | Build for Future | — | — | 🕓 |
+| **EP06** | [**Hype Circle**](EP6%20Hype%20Circle/) | AI 技术周期的趋势：热度退去之后，用户为什么还会回来？ | **2026.11.18 11:00 北京时间** | 📦 演示稿 / 文章 / 海报 |
+
+---
+
+## EP06 · Hype Circle
+
+<img src="EP6%20Hype%20Circle/cover.jpg" width="260" align="right" alt="Hype Circle 第六期分享海报">
+
+**AI 技术周期的趋势** · Oratis · 2026 年 11 月 18 日（周三）上午 11:00，北京时间。
+
+从 ChatGPT 时刻和 Gartner Hype Cycle 出发：我们正站在期望膨胀的顶点，中国开源 AI 正在缩短这个阶段。低谷期只有坚持改进产品、把毛利当生命线的团队能活下来，后半场讨论产品、毛利、AI native 组织与个人怎么做。全套 25 页（含封面）以图形表达为主，要讲的话保存在演讲者备注。
+
+[下载可编辑演示稿（Keynote / PowerPoint 均可打开）](EP6%20Hype%20Circle/EP6-Hype-Circle.pptx) · [离线预览](EP6%20Hype%20Circle/EP6-Hype-Circle.html) · [报刊文章](EP6%20Hype%20Circle/Hype-Circle-article.md) · [逐页讲稿](EP6%20Hype%20Circle/EP6-Hype-Circle.md) · [分享海报](EP6%20Hype%20Circle/cover.jpg)
+
+<br clear="right"/>
 
 ---
 
